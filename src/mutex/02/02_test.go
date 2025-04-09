@@ -17,8 +17,8 @@ func TestUpdateMap(t *testing.T) {
 
 	expectedMap := make(map[int]int) // Crée une map pour stocker les valeurs attendues
 	for i := 0; i < numGoroutines; i++ {
-		key := rand.Intn(1000) // Générer une clé aléatoire
-		value := rand.Intn(1000)
+		key := rand.Intn(10000000) // Générer une clé aléatoire
+		value := rand.Intn(10000000)
 		expectedMap[key] = value
 
 		wg.Add(1)
