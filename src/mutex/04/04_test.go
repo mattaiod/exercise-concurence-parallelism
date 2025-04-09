@@ -14,20 +14,20 @@ func TestComplexStruct(t *testing.T) {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	numGoroutines := r.Intn(1000) + 1
 	for i := 0; i < numGoroutines; i++ {
-		key := string(rand.Intn(26) + 'a') // Générer une clé aléatoire
+		key := rune(rand.Intn(26) + 'a') // Générer une clé aléatoire
 		value := rand.Intn(1000)
 		wg.Add(1)
 		go func(key string, value int) {
 			defer wg.Done()
 			cs.Update(key, value)
-		}(key, value)
+		}(string(key), value)
 	}
 
 	wg.Wait()
 
 	// Valider que toutes les mises à jour sont cohérentes
 	for i := 0; i < numGoroutines; i++ {
-		key := string(rand.Intn(26) + 'a')
-		cs.Get(key) // Assurer que les accès sont corrects
+		key := rune(rand.Intn(26) + 'a')
+		cs.Get(string(key)) // Assurer que les accès sont corrects
 	}
 }

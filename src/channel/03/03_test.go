@@ -7,7 +7,7 @@ import (
 
 func TestPipeline(t *testing.T) {
 	numbers := make(chan int)
-	squared := make(chan int)
+	squared := make(chan int, 5)
 	wg := sync.WaitGroup{}
 
 	wg.Add(1)
